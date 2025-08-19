@@ -19,9 +19,14 @@
                                     <x-heroicon-s-check class="h-4 w-4" />
                                 </x-button>
 
-                                <x-button variant="danger" class="px-2">
-                                    <x-heroicon-s-x-mark class="h-4 w-4" />
-                                </x-button>
+                                <form action="{{ route('tasks.destroy', $task) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this task?');">
+                                    @csrf
+                                    @method('delete')
+
+                                    <x-button type="submit" variant="danger" class="px-2">
+                                        <x-heroicon-s-x-mark class="h-4 w-4" />
+                                    </x-button>
+                                </form>
                             </div>
                         </td>
                     </tr>

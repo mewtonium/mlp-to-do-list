@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\CreateTask;
+use App\Actions\DeleteTask;
 use App\Http\Requests\StoreTaskRequest;
 use App\Models\Task;
 
@@ -32,8 +33,13 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy(Task $task, DeleteTask $action)
     {
-        //
+        $action->handle($task);
+
+        return back()->with([
+            'alert.message' => 'Task has been deleted',
+            'alert.status' => 'info',
+        ]);
     }
 }
