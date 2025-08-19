@@ -18,4 +18,5 @@ Route::controller(TaskController::class)
     ->as('tasks.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::post('/tasks', 'store')->name('store');
     });
