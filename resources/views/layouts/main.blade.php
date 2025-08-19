@@ -12,6 +12,12 @@
 </head>
 <body>
     <main>
+        @if (session()->has('alert.message'))
+            <x-alert status="{{ session()->get('alert.status', 'info') }}">
+                {{ session()->get('alert.message') }}
+            </x-alert>
+        @endif
+
         {{ $slot }}
     </main>
 </body>
