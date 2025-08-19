@@ -1,16 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MLP To-Do</title>
+<x-main-layout>
+    <div class="grid lg:grid-cols-3 gap-8">
+        <div class="col-span-1">
+            <form action="{{ route('tasks.store') }}" method="post" class="flex flex-col">
+                @csrf
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+                <div class="space-y-4">
+                    <div>
+                        <x-text-input name="title" placeholder="Insert task name" class="w-full" />
+                        <x-input-error :message="$errors->first('title')" />
+                    </div>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
-</head>
-<body>
-
-</body>
-</html>
+                    <div>
+                        <x-button type="submit" variant="primary" class="w-full">
+                            Add
+                        </x-button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="lg:col-span-2">
+            <x-task-list />
+        </div>
+    </div>
+</x-main-layout>
