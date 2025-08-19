@@ -22,3 +22,9 @@
         </table>
     </div>
 </div>
+
+@if ($tasks->count() > 0)
+    <div class="mt-4">
+        {{ $tasks->links() }}
+    </div>
+@endif

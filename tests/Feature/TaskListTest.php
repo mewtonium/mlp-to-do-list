@@ -17,6 +17,7 @@ class TaskListTest extends TestCase
         $tasks = Task::factory(3)->create();
 
         $this->get(route('tasks.index'))
+            ->assertOk()
             ->assertSeeText([
                 $tasks[0]->title,
                 $tasks[1]->title,
@@ -28,6 +29,7 @@ class TaskListTest extends TestCase
     public function that_no_tasks_are_listed_if_none_exist()
     {
         $this->get(route('tasks.index'))
+            ->assertOk()
             ->assertSeeText('You have no tasks in your todo list.');
     }
 
@@ -43,6 +45,7 @@ class TaskListTest extends TestCase
         $this->assertDatabaseCount(Task::class, 1);
 
         $this->get(route('tasks.index'))
+            ->assertOk()
             ->assertSeeText([
                 Task::first()->title,
             ]);
@@ -60,6 +63,7 @@ class TaskListTest extends TestCase
         $this->assertDatabaseCount(Task::class, 2);
 
         $this->get(route('tasks.index'))
+            ->assertOk()
             ->assertDontSeeText([
                 $tasks->first()->title,
             ]);
@@ -77,8 +81,31 @@ class TaskListTest extends TestCase
         $this->assertDatabaseCount(Task::class, 2);
 
         $this->get(route('tasks.index'))
+            ->assertOk()
             ->assertDontSeeText([
                 $tasks->first()->title,
             ]);
+    }
+
+    #[Test]
+    public function the_task_list_is_paginated()
+    {
+        $tasks = Task::factory(15)->create();
+        
+        $this->get('/?page=1')
+            ->assertOk()
+            ->assertSeeText([
+                $tasks[0]->title,
+                $tasks[9]->title,
+            ])
+            ->assertDontSeeText($tasks[10]->title);
+
+        $this->get('/?page=2')
+            ->assertOk()
+            ->assertSeeText([
+                $tasks[10]->title,
+                $tasks[14]->title,
+            ])
+            ->assertDontSeeText($tasks[9]->title);
     }
 }

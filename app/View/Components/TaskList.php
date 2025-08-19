@@ -25,7 +25,7 @@ class TaskList extends Component
         $tasks = Task::query()
             ->orderByRaw('completed_at is null desc')
             ->orderBy('id')
-            ->get();
+            ->paginate(10);
 
         return view('components.task-list', [
             'tasks' => $tasks,
