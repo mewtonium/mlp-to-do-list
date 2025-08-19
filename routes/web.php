@@ -20,4 +20,5 @@ Route::controller(TaskController::class)
         Route::get('/', 'index')->name('index');
         Route::post('/tasks', 'store')->name('store');
         Route::delete('/tasks/{task}', 'destroy')->name('destroy');
+        Route::post('/tasks/{task}/complete', 'complete')->name('complete');
     });

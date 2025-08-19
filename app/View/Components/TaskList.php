@@ -23,6 +23,7 @@ class TaskList extends Component
     public function render(): View|Closure|string
     {
         $tasks = Task::query()
+            ->orderByRaw('completed_at is null desc')
             ->orderBy('id')
             ->get();
 

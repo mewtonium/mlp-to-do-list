@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CompleteTask;
 use App\Actions\CreateTask;
 use App\Actions\DeleteTask;
 use App\Http\Requests\StoreTaskRequest;
@@ -40,6 +41,19 @@ class TaskController extends Controller
         return back()->with([
             'alert.message' => 'Task has been deleted',
             'alert.status' => 'info',
+        ]);
+    }
+
+    /**
+     * Marks a task as completed.
+     */
+    public function complete(Task $task, CompleteTask $action)
+    {
+        $action->handle($task);
+
+        return back()->with([
+            'alert.message' => 'Task has been marked as completed!',
+            'alert.status' => 'success',
         ]);
     }
 }

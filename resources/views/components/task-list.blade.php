@@ -10,26 +10,7 @@
             </thead>
             <tbody class="divide-y divide-gray-200 text-gray-800">
                 @forelse ($tasks as $task)
-                    <tr>
-                        <td class="px-4 py-3 text-lg">{{ $task->id }}</td>
-                        <td class="px-4 py-3">{{ $task->title }}</td>
-                        <td class="px-4 py-3">
-                            <div class="flex justify-end gap-2">
-                                <x-button variant="success" class="px-2">
-                                    <x-heroicon-s-check class="h-4 w-4" />
-                                </x-button>
-
-                                <form action="{{ route('tasks.destroy', $task) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this task?');">
-                                    @csrf
-                                    @method('delete')
-
-                                    <x-button type="submit" variant="danger" class="px-2">
-                                        <x-heroicon-s-x-mark class="h-4 w-4" />
-                                    </x-button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
+                    <x-task-list-item :task="$task" />
                 @empty
                     <tr>
                         <td class="px-4 py-3 text-center italic" colspan="3">
