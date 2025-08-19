@@ -1,21 +1,25 @@
 <x-main-layout>
-    <div class="w-1/4">
-        <form action="{{ route('tasks.store') }}" method="post" class="space-y-4 flex flex-col">
-            @csrf
+    <div class="grid grid-cols-3 gap-8">
+        <div class="col-span-1">
+            <form action="{{ route('tasks.store') }}" method="post" class="flex flex-col">
+                @csrf
 
-            <div>
-                <x-text-input name="title" placeholder="Insert task name" class="w-full" />
-                <x-input-error :message="$errors->first('title')" />
-            </div>
+                <div class="space-y-4">
+                    <div>
+                        <x-text-input name="title" placeholder="Insert task name" class="w-full" />
+                        <x-input-error :message="$errors->first('title')" />
+                    </div>
 
-            <div>
-                <x-button type="submit" variant="primary" class="w-full">
-                    Add
-                </x-button>
-            </div>
-        </form>
-    </div>
-    <div class="w-3/4">
-        {{ $tasks }} {{-- TODO output tasks --}}
+                    <div>
+                        <x-button type="submit" variant="primary" class="w-full">
+                            Add
+                        </x-button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-span-2">
+            <x-task-list />
+        </div>
     </div>
 </x-main-layout>

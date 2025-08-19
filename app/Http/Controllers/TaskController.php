@@ -13,13 +13,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::query()
-            ->orderByDesc('created_at')
-            ->get();
-
-        return view('tasks', [
-            'tasks' => $tasks,
-        ]);
+        return view('tasks');
     }
 
     /**

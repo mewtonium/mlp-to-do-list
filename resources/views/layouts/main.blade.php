@@ -13,7 +13,7 @@
 <body class="min-h-screen bg-zinc-200 py-10">
     <main class="container">
         @if (session()->has('alert.message'))
-            <x-alert status="{{ session()->get('alert.status', 'info') }}">
+            <x-alert status="{{ session()->get('alert.status', 'info') }}" class="mb-6">
                 {{ session()->get('alert.message') }}
             </x-alert>
         @endif
